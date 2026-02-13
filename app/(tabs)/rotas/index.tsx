@@ -4,11 +4,11 @@ import { useRouter } from "expo-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Calendar, MapPin, Navigation } from "lucide-react-native";
+import { Calendar, MapPin } from "lucide-react-native";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Loading, EmptyState } from "@/components/ui/Feedback";
 import { PageHeader, StatusBadge } from "@/components/layout";
-import { Colors, RotaStatusColors } from "@/constants/theme";
+import { Colors } from "@/constants/theme";
 import { formatDateOnly } from "@/lib/dateUtils";
 
 export default function RotasListScreen() {
@@ -40,13 +40,12 @@ export default function RotasListScreen() {
     const visitados = pontos.filter((p: any) => p.visitado).length;
     const total = pontos.length;
     const pct = total > 0 ? Math.round((visitados / total) * 100) : 0;
-    const isComplete = pct === 100;
-    const barColor = isComplete ? Colors.success.DEFAULT : Colors.primary.DEFAULT;
+    const barColor = pct === 100 ? Colors.success.DEFAULT : Colors.primary.DEFAULT;
 
     return (
       <Card
         onPress={() => router.push(`/(tabs)/rotas/${item.id}` as any)}
-        style={{ marginLeft: 20, marginRight: 20, marginBottom: 12 }}
+        style={{ marginHorizontal: 20, marginBottom: 12 }}
       >
         <CardContent>
           {/* Title + Status */}
@@ -82,16 +81,14 @@ export default function RotasListScreen() {
 
           {/* Point tags */}
           <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
-            {pontos.slice(0, 3).map((p: any, i: number) => (
+            {pontos.slice(0, 3).map((p: any) => (
               <View
                 key={p.id}
                 style={{
                   backgroundColor: p.visitado ? Colors.success.bg : Colors.muted,
                   borderRadius: 6,
-                  paddingLeft: 8,
-                  paddingRight: 8,
-                  paddingTop: 4,
-                  paddingBottom: 4,
+                  paddingHorizontal: 8,
+                  paddingVertical: 4,
                   marginRight: 6,
                   marginBottom: 4,
                 }}
@@ -110,10 +107,8 @@ export default function RotasListScreen() {
               </View>
             ))}
             {pontos.length > 3 && (
-              <View style={{ backgroundColor: Colors.muted, borderRadius: 6, paddingLeft: 8, paddingRight: 8, paddingTop: 4, paddingBottom: 4 }}>
-                <Text style={{ fontSize: 11, fontFamily: "Inter_500Medium", color: Colors.text.muted }}>
-                  +{pontos.length - 3}
-                </Text>
+              <View style={{ backgroundColor: Colors.muted, borderRadius: 6, paddingHorizontal: 8, paddingVertical: 4 }}>
+                <Text style={{ fontSize: 11, fontFamily: "Inter_500Medium", color: Colors.text.muted }}>+{pontos.length - 3}</Text>
               </View>
             )}
           </View>

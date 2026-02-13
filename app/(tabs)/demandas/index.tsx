@@ -56,10 +56,10 @@ export default function DemandasListScreen() {
       <Card
         accentColor={statusConfig.color}
         onPress={() => router.push(`/(tabs)/demandas/${item.id}` as any)}
-        style={{ marginLeft: 20, marginRight: 20, marginBottom: 10 }}
+        style={{ marginHorizontal: 20, marginBottom: 10 }}
       >
-        <CardContent style={{ paddingTop: 14, paddingBottom: 14 }}>
-          {/* Protocol + more */}
+        <CardContent style={{ paddingVertical: 14 }}>
+          {/* Protocol + more - uses View for row */}
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
             <Text style={{ fontSize: 11, fontFamily: "Inter_500Medium", color: Colors.text.muted, letterSpacing: 0.3 }}>
               #{item.protocolo}

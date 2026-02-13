@@ -54,39 +54,41 @@ export default function MunicipesListScreen() {
     return (
       <Pressable
         onPress={() => router.push(`/(tabs)/municipes/${item.id}` as any)}
-        style={({ pressed }) => ({
-          flexDirection: "row" as const,
-          alignItems: "center" as const,
-          paddingTop: 13,
-          paddingBottom: 13,
-          paddingLeft: 20,
-          paddingRight: 20,
-          backgroundColor: pressed ? "#F8FAFC" : "transparent",
-          borderBottomWidth: 1,
-          borderBottomColor: Colors.border.light,
-        })}
+        style={({ pressed }) => ({ backgroundColor: pressed ? "#F1F5F9" : "transparent" })}
       >
-        {/* Avatar */}
-        <Avatar name={item.nome} size={44} color={catColor} />
+        {/* ROW layout in a regular View - NOT inside Pressable style */}
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            paddingVertical: 13,
+            paddingHorizontal: 20,
+            borderBottomWidth: 1,
+            borderBottomColor: Colors.border.light,
+          }}
+        >
+          <Avatar name={item.nome} size={44} color={catColor} />
 
-        {/* Name + Phone */}
-        <View style={{ flex: 1, marginLeft: 14 }}>
-          <Text style={{ fontSize: 14, fontFamily: "Inter_600SemiBold", color: Colors.text.DEFAULT }} numberOfLines={1}>
-            {item.nome}
-          </Text>
-          <Text style={{ fontSize: 12, fontFamily: "Inter_400Regular", color: Colors.text.muted, marginTop: 2 }}>
-            {formatPhone(item.telefone)}
-          </Text>
-        </View>
+          <View style={{ flex: 1, marginLeft: 14 }}>
+            <Text
+              style={{ fontSize: 14, fontFamily: "Inter_600SemiBold", color: Colors.text.DEFAULT }}
+              numberOfLines={1}
+            >
+              {item.nome}
+            </Text>
+            <Text style={{ fontSize: 12, fontFamily: "Inter_400Regular", color: Colors.text.muted, marginTop: 2 }}>
+              {formatPhone(item.telefone)}
+            </Text>
+          </View>
 
-        {/* Category badge + count */}
-        <View style={{ alignItems: "flex-end" as const, marginLeft: 10 }}>
-          {categoria?.nome ? (
-            <Badge label={categoria.nome} color={catColor} bg={`${catColor}15`} />
-          ) : null}
-          <Text style={{ fontSize: 10, fontFamily: "Inter_400Regular", color: Colors.text.muted, marginTop: 4 }}>
-            {demandasCount} demanda{demandasCount !== 1 ? "s" : ""}
-          </Text>
+          <View style={{ alignItems: "flex-end", marginLeft: 10 }}>
+            {categoria?.nome ? (
+              <Badge label={categoria.nome} color={catColor} bg={`${catColor}15`} />
+            ) : null}
+            <Text style={{ fontSize: 10, fontFamily: "Inter_400Regular", color: Colors.text.muted, marginTop: 4 }}>
+              {demandasCount} demanda{demandasCount !== 1 ? "s" : ""}
+            </Text>
+          </View>
         </View>
       </Pressable>
     );
