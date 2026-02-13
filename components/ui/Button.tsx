@@ -6,7 +6,7 @@ import {
   type ViewStyle,
 } from "react-native";
 import { Colors, Shadow } from "@/constants/theme";
-import * as Haptics from "expo-haptics";
+
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
 type ButtonSize = "sm" | "md" | "lg";
@@ -53,7 +53,7 @@ export function Button({
   const s = sizeStyles[size];
 
   const handlePress = (e: any) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    
     onPress?.(e);
   };
 
